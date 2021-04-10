@@ -16,10 +16,10 @@ def preproc(seq, voc, max_len = MAX_LEN):
 x_train = np.array([preproc(seq, vocab) for seq in eng_train["Name"]], dtype = np.int8)
 y_train = np.array([0 if g == 'F' else 1 for g in eng_train["Gender"]], dtype = np.int8)
 
-from tensorflow.keras.models import Sequential
+ffrom tensorflow.keras.models import Sequential
 from tensorflow.keras import layers
 
-embedding_dim = 15
+embedding_dim = 9
 
 model = Sequential()
 model.add(layers.Embedding(input_dim=len(vocab) + 1, 
@@ -49,7 +49,8 @@ model.add(layers.Embedding(input_dim=len(vocab) + 1,
                            output_dim=embedding_dim, 
                            input_length=MAX_LEN))
 model.add(layers.GlobalMaxPool1D())
-model.add(layers.Dense(15, activation='relu'))
+model.add(layers.Dense(35, activation='relu'))
+model.add(layers.Dense(35, activation='relu'))
 model.add(layers.Dense(1, activation='sigmoid'))
 model.compile(optimizer='adam',
               loss='binary_crossentropy',
@@ -75,8 +76,8 @@ model = Sequential()
 model.add(layers.Embedding(input_dim=len(vocab) + 1, 
                            output_dim=embedding_dim, 
                            input_length=MAX_LEN))
-model.add(layers.GRU(15))
-model.add(layers.Dense(15, activation='relu'))
+model.add(layers.GRU(19, activation='relu'))
+model.add(layers.Dense(18, activation='relu'))
 model.add(layers.Dense(1, activation='sigmoid'))
 model.compile(optimizer='adam',
               loss='binary_crossentropy',
