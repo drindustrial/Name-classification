@@ -76,8 +76,9 @@ model = Sequential()
 model.add(layers.Embedding(input_dim=len(vocab) + 1, 
                            output_dim=embedding_dim, 
                            input_length=MAX_LEN))
-model.add(layers.GRU(19, activation='relu'))
-model.add(layers.Dense(18, activation='relu'))
+model.add(layers.LSTM(15, activation='relu'))
+model.add(layers.Dropout(0.15))
+model.add(layers.Dense(16, activation='relu'))
 model.add(layers.Dense(1, activation='sigmoid'))
 model.compile(optimizer='adam',
               loss='binary_crossentropy',
