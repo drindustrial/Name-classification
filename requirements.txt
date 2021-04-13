@@ -1,3 +1,5 @@
 tensorflow
 pandas
 numpy
+sklearn
+matplotlib
