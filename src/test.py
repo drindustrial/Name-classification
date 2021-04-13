@@ -4,7 +4,7 @@ import tensorflow as tf
 
 eng_train = pd.read_csv("train_eng.csv")
 eng_test = pd.read_csv("test_eng.csv")
-
+eng_train_sorted = eng_train.sort_values("Name")
 clean_train = eng_train_sorted.copy()
 prev = None
 for index, row in eng_train_sorted.iterrows():

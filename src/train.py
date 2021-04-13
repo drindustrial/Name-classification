@@ -6,7 +6,7 @@ from tensorflow.keras import layers
 from tensorflow.keras import regularizers
 
 eng_train = pd.read_csv("train_eng.csv")
-
+eng_train_sorted = eng_train.sort_values("Name")
 clean_train = eng_train_sorted.copy()
 prev = None
 for index, row in eng_train_sorted.iterrows():
@@ -31,7 +31,7 @@ def preproc(seq, voc, max_len = MAX_LEN):
     return res
 
 x_train = np.array([preproc(seq, vocab) for seq in clean_train["Name"]], dtype = np.int8)
-y_train = np.array([0 if g == 'F' else 1 for g in eng_train["Gender"]], dtype = np.int8)
+y_train = np.array([0 if g == 'F' else 1 for g in clean_train["Gender"]], dtype = np.int8)
 
 
 embedding_dim = 5
@@ -53,8 +53,8 @@ model.summary()
 print("Model #1 Dense layers")
 print("Training...")
 history = model.fit(x_train, y_train,
-                    epochs=25,
-                    verbose=2,
+                    epochs=80,
+                    verbose=0,
                     batch_size=128)
 model.save("model1.h5")
 
@@ -82,7 +82,7 @@ print("Model #2 MaxPool and Dense layers")
 print("Training...")
 
 history = model.fit(x_train, y_train,
-                    epochs=25,
+                    epochs=50,
                     verbose=2,
                     batch_size=128)
 
@@ -111,8 +111,8 @@ print("Model #3 GRU and Dense layers")
 print("Training...")
 
 history = model.fit(x_train, y_train,
-                    epochs=25,
-                    verbose=2,
+                    epochs=85,
+                    verbose=0,
                     batch_size=128)
 
 model.save("model3.h5")
