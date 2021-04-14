@@ -1,11 +1,15 @@
 import numpy as np
 import pandas as pd
+import os
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import Sequential
 from tensorflow.keras import layers
 from tensorflow.keras import regularizers
 
-eng_train = pd.read_csv("train_eng.csv")
+path = os.path.abspath(os.getcwd())
+path = path[:path.rfind('\\') + 1] + "data\\data1\\"
+
+eng_train = pd.read_csv(path + "train_eng.csv")
 eng_train_sorted = eng_train.sort_values("Name")
 clean_train = eng_train_sorted.copy()
 prev = None
